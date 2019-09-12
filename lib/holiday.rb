@@ -69,12 +69,9 @@ def all_supplies_in_holidays(holiday_hash)
 end
 
 def all_holidays_with_bbq(holiday_hash)
-  holiday_hash.map do |season, holiday|
-    holiday.map do |holiday, items|
-      if items.include?("BBQ")
-        holiday_hash << holiday
-      end
-    end
-  end
-  holidays_with_BBQ.uniq
+  holiday_hash.collect do |season, holidays|
+     holidays.select do |holiday,items|
+       items.include?("BBQ")
+     end .keys
+   end.flatten
 end
